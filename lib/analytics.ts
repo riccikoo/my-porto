@@ -1,4 +1,4 @@
-import { createClient } from "./supabase/server"
+import { createClient } from "../app/server"
 
 export async function trackPageVisit(pathname: string) {
   try {

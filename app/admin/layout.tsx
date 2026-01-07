@@ -1,6 +1,6 @@
 import type React from "react"
 import { redirect } from "next/navigation"
-import { createClient } from "@/lib/supabase/server"
+import { createClient } from "@/app/server"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { AnalyticsTracker } from "@/components/analytics-tracker"
