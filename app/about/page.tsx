@@ -15,14 +15,14 @@ export default function AboutPage() {
           <Link href="/" className="text-2xl font-bold hover:opacity-80">
             Portfolio
           </Link>
-          <div className="flex gap-4">
+          {/* <div className="flex gap-4">
             <Link href="/portfolio">
               <Button variant="ghost">Portfolio</Button>
             </Link>
             <Link href="/auth/login">
               <Button variant="ghost">Login</Button>
             </Link>
-          </div>
+          </div> */}
         </div>
       </nav>
 
