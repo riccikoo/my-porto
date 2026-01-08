@@ -12,12 +12,12 @@ export default function Home() {
           <h1 className="text-2xl font-bold">Portfolio</h1>
           <div className="flex gap-2 items-center">
             <ThemeToggle />
-            <Link href="/auth/login">
+            {/* <Link href="/auth/login">
               <Button variant="ghost">Login</Button>
             </Link>
             <Link href="/auth/sign-up">
               <Button>Sign Up</Button>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </nav>
