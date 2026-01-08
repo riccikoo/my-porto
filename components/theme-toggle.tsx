@@ -1,6 +1,6 @@
 "use client"
 
-import { useThemeToggle } from "@/lib/theme-provider"
+import { useThemeToggle } from "./theme-provider"
 import { Moon, Sun } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
