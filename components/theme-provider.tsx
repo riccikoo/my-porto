@@ -46,3 +46,15 @@ export function useTheme() {
   }
   return context
 }
+
+export function useThemeToggle() {
+  const { isDark, setIsDark } = useTheme()
+
+  const toggleTheme = () => {
+    const newIsDark = !isDark
+    console.log("[v0] Toggling theme to:", newIsDark)
+    setIsDark(newIsDark)
+  }
+
+  return { isDark, toggleTheme }
+}
