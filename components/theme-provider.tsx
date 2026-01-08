@@ -3,17 +3,18 @@
 import type React from "react"
 import { createContext, useContext, useEffect, useState } from "react"
 
-const ThemeContext = createContext<{ isDark: boolean; setIsDark: (isDark: boolean) => void }>({
-  isDark: false,
-  setIsDark: () => {},
-})
+interface ThemeContextType {
+  isDark: boolean
+  toggleTheme: () => void
+}
+
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [isDark, setIsDark] = useState(false)
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true)
     // Check localStorage or system preference
     const stored = localStorage.getItem("theme")
     if (stored) {
@@ -21,6 +22,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     } else {
       setIsDark(window.matchMedia("(prefers-color-scheme: dark)").matches)
     }
+    setMounted(true)
   }, [])
 
   useEffect(() => {
@@ -36,25 +38,22 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }
   }, [isDark, mounted])
 
-  return <ThemeContext.Provider value={{ isDark, setIsDark }}>{children}</ThemeContext.Provider>
-}
-
-export function useTheme() {
-  const context = useContext(ThemeContext)
-  if (!context) {
-    throw new Error("useTheme must be used within ThemeProvider")
+  const toggleTheme = () => {
+    console.log("[v0] Current isDark:", isDark)
+    setIsDark((prev) => {
+      const newValue = !prev
+      console.log("[v0] Setting new isDark:", newValue)
+      return newValue
+    })
   }
-  return context
+
+  return <ThemeContext.Provider value={{ isDark, toggleTheme }}>{children}</ThemeContext.Provider>
 }
 
 export function useThemeToggle() {
-  const { isDark, setIsDark } = useTheme()
-
-  const toggleTheme = () => {
-    const newIsDark = !isDark
-    console.log("[v0] Toggling theme to:", newIsDark)
-    setIsDark(newIsDark)
+  const context = useContext(ThemeContext)
+  if (!context) {
+    throw new Error("useThemeToggle must be used within ThemeProvider")
   }
-
-  return { isDark, toggleTheme }
+  return context
 }
